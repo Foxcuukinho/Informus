@@ -1,0 +1,36 @@
+{
+  "sources": [
+    {
+      "category": "Saúde e Medicina",
+      "urls": ["https://www.who.int", "https://www.gov.br/saude", "https://bvsms.saude.gov.br"]
+    },
+    {
+      "category": "Ciência e Tecnologia",
+      "urls": ["https://www.nasa.gov", "https://www.gov.br/mcti"]
+    },
+    {
+      "category": "História",
+      "urls": ["https://www.britannica.com", "https://www.gov.br/iphan"]
+    },
+    {
+      "category": "Política e Leis",
+      "urls": ["https://www.planalto.gov.br", "https://www.senado.leg.br", "https://www.stf.jus.br", "https://www.camara.leg.br"]
+    },
+    {
+      "category": "Meio Ambiente",
+      "urls": ["https://www.ibama.gov.br", "https://www.ipcc.ch", "https://portal.inpe.br"]
+    },
+    {
+      "category": "Economia",
+      "urls": ["https://www.bcb.gov.br", "https://www.ibge.gov.br", "https://www.imf.org", "https://www.ipea.gov.br"]
+    },
+    {
+      "category": "Vacinas",
+      "urls": ["https://www.gov.br/saude/vacinas", "https://www.who.int/immunization"]
+    },
+    {
+      "category": "Espaço e Astronomia",
+      "urls": ["https://www.nasa.gov", "https://www.esa.int"]
+    }
+  ]
+}

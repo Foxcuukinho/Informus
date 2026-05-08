@@ -1,0 +1,62 @@
+{
+	"nodes":[
+		{"id":"ebc5228e34fe0503","type":"file","file":"obsidian/Rules And Instrutictions/Text Verification Instruction.md","x":0,"y":-205,"width":400,"height":418},
+		{"id":"b71f106d8a3c62df","type":"text","text":"Input","x":-440,"y":-4,"width":250,"height":50,"color":"6"},
+<<<<<<< HEAD
+=======
+		{"id":"f9c901801f21cc74","type":"text","text":"Desculpe, mas não é possível verificar a veracidade dessa informação por alguns desse motivos: Falta de contexto; Não bem escrito. Tente escrever de um melhor jeito.","x":600,"y":21,"width":250,"height":219,"color":"#ffffff"},
+		{"id":"c0f5892d5388d62f","type":"text","text":"Mais de um tópico?","x":582,"y":-134,"width":250,"height":60,"color":"1"},
+>>>>>>> 8723e4cf0863bf551795a07e3937179e721df283
+		{"id":"19e0dfcb3feef19a","type":"text","text":"Serper Manda  o Contéudo, e o html ( se pedido)","x":3148,"y":-413,"width":250,"height":68,"color":"4"},
+		{"id":"6fe142c5210964a0","type":"text","text":"(a definir)","x":3428,"y":-468,"width":250,"height":60,"color":"2"},
+		{"id":"6a5e4bff3d80db63","type":"text","text":"Suficiente Para dar um veredito final?","x":3428,"y":-332,"width":250,"height":60,"color":"1"},
+		{"id":"ac3a9db57e647155","type":"text","text":"( Algo complexo)","x":3428,"y":-112,"width":250,"height":50,"color":"2"},
+<<<<<<< HEAD
+		{"id":"af2d7a36e4bfe274","type":"text","text":".","x":1516,"y":-86,"width":50,"height":60,"color":"2"},
+		{"id":"1f0078a46840ba10","type":"text","text":"Detalhe importante: o gemini só analisa a próxima url caso a anterior não tenha sido suficiente","x":1416,"y":-480,"width":250,"height":120,"color":"5"},
+		{"id":"87d57c46ba49cc3e","type":"text","text":"Serper API pesquisa:\n\"site: (url) (topic)\"","x":1760,"y":-99,"width":200,"height":86,"color":"4"},
+		{"id":"074f5001ef565aa7","type":"text","text":"Serper API Manda os 10 resultados mais relevantes da pesquisa ( Nome de artigos e descrição)","x":2320,"y":-130,"width":214,"height":148,"color":"4"},
+		{"id":"a7589079ea3529d6","type":"file","file":"obsidian/Rules And Instrutictions/Catch the best results.md","x":2700,"y":-200,"width":270,"height":275},
+		{"id":"4cbc094c0750f2a5","type":"file","file":"obsidian/Rules And Instrutictions/How separate informations or topics.md","x":565,"y":-520,"width":320,"height":380},
+		{"id":"f9c901801f21cc74","type":"text","text":"Desculpe, mas não é possível verificar a veracidade dessa informação por alguns desse motivos: Falta de contexto; Não bem escrito. Tente escrever de um melhor jeito.","x":600,"y":54,"width":250,"height":219,"color":"#ffffff"},
+		{"id":"4eb4ab2907915ba8","type":"file","file":"obsidian/Rules And Instrutictions/Instructions for verifying reliable sources.md","x":1080,"y":-180,"width":300,"height":278},
+		{"id":"5aa7338a909b3f6a","type":"text","text":"","x":1510,"y":54,"width":250,"height":60}
+=======
+		{"id":"4eb4ab2907915ba8","type":"file","file":"obsidian/Rules And Instrutictions/Instructions for verifying reliable sources.md","x":940,"y":-65,"width":300,"height":278},
+		{"id":"4cbc094c0750f2a5","type":"file","file":"obsidian/Rules And Instrutictions/How separate informations or topics.md","x":782,"y":-760,"width":316,"height":420},
+		{"id":"af2d7a36e4bfe274","type":"text","text":".","x":1516,"y":-86,"width":50,"height":60,"color":"2"},
+		{"id":"5aa7338a909b3f6a","type":"text","text":"","x":1510,"y":213,"width":250,"height":60},
+		{"id":"1f0078a46840ba10","type":"text","text":"Detalhe importante: o gemini só analisa a próxima url caso a anterior não tenha sido suficiente","x":1416,"y":-480,"width":250,"height":120,"color":"5"},
+		{"id":"87d57c46ba49cc3e","type":"text","text":"Serper API pesquisa:\n\"site: (url) (topic)\"","x":1760,"y":-99,"width":200,"height":86,"color":"4"},
+		{"id":"074f5001ef565aa7","type":"text","text":"Serper API Manda os 10 resultados mais relevantes da pesquisa ( Nome de artigos e descrição)","x":2320,"y":-130,"width":214,"height":148,"color":"4"},
+		{"id":"a7589079ea3529d6","type":"file","file":"obsidian/Rules And Instrutictions/Catch the best results.md","x":2700,"y":-200,"width":270,"height":275}
+>>>>>>> 8723e4cf0863bf551795a07e3937179e721df283
+	],
+	"edges":[
+		{"id":"17cfe09fef3a05ba","fromNode":"19e0dfcb3feef19a","fromSide":"right","toNode":"6fe142c5210964a0","toSide":"left"},
+		{"id":"38782a5c72b9c75e","fromNode":"87d57c46ba49cc3e","fromSide":"right","toNode":"074f5001ef565aa7","toSide":"left","color":"2","label":"manda json com os snipeets \ne titulos "},
+		{"id":"b8938a70ab1fbce0","fromNode":"6fe142c5210964a0","fromSide":"bottom","toNode":"6a5e4bff3d80db63","toSide":"top"},
+		{"id":"631f9a8ff9134f64","fromNode":"6a5e4bff3d80db63","fromSide":"bottom","toNode":"ac3a9db57e647155","toSide":"top","color":"4","label":"Sim"},
+		{"id":"a385c88a7c83a87d","fromNode":"b71f106d8a3c62df","fromSide":"right","toNode":"ebc5228e34fe0503","toSide":"left"},
+		{"id":"5ad8d6dcb243eb3a","fromNode":"ebc5228e34fe0503","fromSide":"right","toNode":"f9c901801f21cc74","toSide":"left","color":"1","label":"NO"},
+<<<<<<< HEAD
+		{"id":"a866109734c11c69","fromNode":"4eb4ab2907915ba8","fromSide":"right","toNode":"5aa7338a909b3f6a","toSide":"left","color":"1","label":"matched:false"},
+		{"id":"76ac783bda7b5b6f","fromNode":"4eb4ab2907915ba8","fromSide":"right","toNode":"af2d7a36e4bfe274","toSide":"left","color":"4","label":"matched:true"},
+		{"id":"5a22ee7a27c61d5a","fromNode":"af2d7a36e4bfe274","fromSide":"right","toNode":"87d57c46ba49cc3e","toSide":"left","color":"2","label":"Para cada Url"},
+		{"id":"da71004df87deed3","fromNode":"af2d7a36e4bfe274","fromSide":"top","toNode":"1f0078a46840ba10","toSide":"bottom","color":"2"},
+		{"id":"75b35e134fc56dcf","fromNode":"074f5001ef565aa7","fromSide":"right","toNode":"a7589079ea3529d6","toSide":"left"},
+		{"id":"613bcaa92ef9d66b","fromNode":"ebc5228e34fe0503","fromSide":"right","toNode":"4cbc094c0750f2a5","toSide":"left","color":"4","label":"YES"},
+		{"id":"48853468c6e294a4","fromNode":"4cbc094c0750f2a5","fromSide":"right","toNode":"4eb4ab2907915ba8","toSide":"left","color":"4","label":"Tópico único"}
+=======
+		{"id":"a002c33a4d73be29","fromNode":"ebc5228e34fe0503","fromSide":"right","toNode":"c0f5892d5388d62f","toSide":"left","color":"4","label":"YES"},
+		{"id":"2a346e74ea077983","fromNode":"c0f5892d5388d62f","fromSide":"top","toNode":"4cbc094c0750f2a5","toSide":"left","color":"4","label":"sim"},
+		{"id":"ae5c239086d046d9","fromNode":"4cbc094c0750f2a5","fromSide":"bottom","toNode":"4eb4ab2907915ba8","toSide":"top","color":"2","label":"para cada tópico"},
+		{"id":"a866109734c11c69","fromNode":"4eb4ab2907915ba8","fromSide":"right","toNode":"5aa7338a909b3f6a","toSide":"left","color":"1","label":"matched:false"},
+		{"id":"76ac783bda7b5b6f","fromNode":"4eb4ab2907915ba8","fromSide":"right","toNode":"af2d7a36e4bfe274","toSide":"left","color":"4","label":"matched:true"},
+		{"id":"0d6dc3ea6aabaeee","fromNode":"4cbc094c0750f2a5","fromSide":"left","toNode":"ebc5228e34fe0503","toSide":"top","color":"2","label":"se retornar \"[]\",\nrepete o processo,\n máximo de 5 vezes repetidas\n"},
+		{"id":"5a22ee7a27c61d5a","fromNode":"af2d7a36e4bfe274","fromSide":"right","toNode":"87d57c46ba49cc3e","toSide":"left","color":"2","label":"Para cada Url"},
+		{"id":"da71004df87deed3","fromNode":"af2d7a36e4bfe274","fromSide":"top","toNode":"1f0078a46840ba10","toSide":"bottom","color":"2"},
+		{"id":"75b35e134fc56dcf","fromNode":"074f5001ef565aa7","fromSide":"right","toNode":"a7589079ea3529d6","toSide":"left"}
+>>>>>>> 8723e4cf0863bf551795a07e3937179e721df283
+	]
+}
