@@ -30,14 +30,15 @@ async function callIA(prompt) {
 
 
 async function main(input) {
+    
     console.log('main')
     let inputInfoJSON = await analysInputAndProcess(input)
     return await inputInfoJSON
-
 }
 
-async function analysInputAndProcess(input) {
-    console.log('2')
+async function GenerateInputInfoJSON(input) {
+    
+    console.log('GenerateInputInfoJSON')
     return await callIA(`
             Analyze: "${input}"
             1:
