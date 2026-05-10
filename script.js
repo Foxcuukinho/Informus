@@ -21,9 +21,9 @@ VerifyButton.addEventListener('click', async function() {
         
         const data = await res.json()
         
-        if (data.ok) {
+        if (data) {
             console.log('Tudo certo!')
-            console.log(data.result) 
+            console.log(data) 
         }       
         else {
             console.log('No')
