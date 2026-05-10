@@ -1,5 +1,15 @@
+# Editor / IDE
 .vscode/
 .obsidian/
+
+# Obsidian Base files
+*.base
+
+# Env
 .env
-.env
+
+# Dependências
 node_modules/
+
+package-lock.json
+package.json
