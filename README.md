@@ -82,6 +82,13 @@ Informus/
 
 ---
 
+
+## Coisas a fazer
+
+    - [] FastSearch
+    - [] MultipleClaimsFlux
+    -
+
 ## ⚠️ Observações
 
 - O arquivo `.env` **não deve ser commitado** no repositório (já está no `.gitignore`).

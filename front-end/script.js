@@ -5,11 +5,13 @@ const input = document.getElementById('input')
 
 VerifyButton.addEventListener('click', async function() {
 
-    VerifyButton.textContent = "..."
-    VerifyButton.style.backgroundColor = "rgb(63, 89, 117)"
+    
     const input_text = input.value
 
     if (searching == false) {
+
+        VerifyButton.textContent = "..."
+        VerifyButton.style.backgroundColor = "rgb(63, 89, 117)"
 
         searching = true
 

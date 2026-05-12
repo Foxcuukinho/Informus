@@ -1,62 +1,174 @@
 import 'dotenv/config';
 import OpenAI from 'openai';
 import express from 'express';
-import sources from './sources.json' assert { type: 'json'};
+import prompts from './prompts.js'
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import { readFileSync } from 'fs';
+
+const sources = JSON.parse(
+  readFileSync(new URL('./sources.json', import.meta.url))
+);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const openRouter = new OpenAI({
-    apiKey: process.env.API_KEY,
-    baseURL: 'https://openrouter.ai/api/v1',    
+    apiKey: process.env.IA_API_KEY,
+    baseURL: 'https://openrouter.ai/api/v1'
 });
 
 const app = express();
-app.use(express.static('frontend'));
-app.use(express.json());
-app.listen(3000, () => console.log('Servidor Rodando'));
 
-app.post('/startsearch', async (req, res) => {
-    const text = req.body.text;
-    const final_result = await main(text);
-    res.json(final_result);
+app.use(express.static(join(__dirname, '../front-end')));
+app.use(express.json());
+
+app.listen(3000, () => {
+    console.log('[SERVER] Rodando na porta 3000');
 });
 
+app.post('/startsearch', async (req, res) => {
+
+    try {
+
+        const text = req.body.text;
+
+        console.log('[REQUEST]', text);
+
+        const finalResult = await main(text);
+
+        res.json(finalResult);
+
+    } catch (err) {
+
+        console.log('[ROUTE_ERROR]', err.message);
+
+        res.status(500).json({
+            error: 'Erro interno no servidor'
+        });
+    }
+});
 
 async function callIA(prompt) {
-    const completion = await openRouter.chat.completions.create({ 
-        model: 'openrouter/free',
-        messages: [{ role: 'user', content: prompt }],
-    });
-    return completion.choices[0].message.content;
-}
 
+    try {
+        const completion = await openRouter.chat.completions.create({
+            model: 'meta-llama/llama-3.3-70b-instruct:free',
+            messages: [
+                {
+                    role: 'user',
+                    content: prompt
+                }
+            ]
+        });
+
+        return completion.choices?.[0]?.message?.content;
+
+    } catch (err) {
+        console.log('[IA_MAIN_ERROR]', err.message);
+        const completion = await openRouter.chat.completions.create({
+            model: 'openrouter/free',
+            provider: {
+                ignore: [
+                    'nvidia/nemotron-nano-9b-v2:free',
+                    'nvidia/nemotron-nano-12b-v2:free',
+                    'lfm/lfm2-1.2b:free'
+                ]
+            },
+            messages: [
+                {
+                    role: 'user',
+                    content: prompt
+                }
+            ]
+        });
+
+        return completion.choices?.[0]?.message?.content;
+    }
+}
 
 async function main(input) {
-    
-    console.log('main')
-    let inputInfoJSON = await analysInputAndProcess(input)
-    return await inputInfoJSON
+
+    const claimsData = await generateClaimsData(input);
+
+    return await searchToVerdict(claimsData);
 }
 
-async function GenerateInputInfoJSON(input) {
+function makeClaimDataPrompt(input) {
+    const prompt =  `
     
-    console.log('GenerateInputInfoJSON')
-    return await callIA(`
-            Analyze: "${input}"
-            1:
-            Return YES if the text is a standalone real-world claim/question that can be fact-checked.
-            Return NO if conversational, opinion-only, nonsense/out of context, or dependent on previous messages.
-            2:
-            Extract independently verifiable topics.
-            Rewrite topics to be self-contained if needed.
-            Do not invent information.
-            Ignore opinions.
-            3:
-            Match each topic with the most semantically related categories from:
-            ${JSON.stringify(sources)}
-            Think broadly.
-            Only use matched:false if absolutely nothing relates.
-            Return ONLY:
-            {"checkable":true,"matched":true,"topics":[{"topic":"exact topic","urls":["https://url1.com"]}]}
-            If invalid:
-            {"checkable":false,"matched":false,"topics":[]}
-`);
+        Analyze the following text: "${input}"
+    
+        ${prompts[0]}
+
+        ${JSON.stringify(sources)}
+
+        ${prompts[1]}
+        `
+
+        return prompt
+}
+
+async function generateClaimsData(input) {
+
+    const prompt = makeClaimDataPrompt(input)
+    const raw = await callIA(prompt);
+
+    try {
+
+        return JSON.parse(raw.trim());
+
+    } catch (err) {
+
+        console.log('[JSON_PARSE_ERROR]');
+        console.log(raw);
+
+        return {
+            checkable: false,
+            matched: false,
+            claims: []
+        };
+    }
+}
+
+async function searchToVerdict(claimsData) {
+
+    for (const claim of claimsData.claims) {
+
+        if (claim.urls.length > 0) {
+
+            console.log('[SEARCH]', claim.claimText);
+
+            claim.searchUrl = await searchSerper(
+                claim.claimText,
+                claim.urls[0]
+            )
+        }
+    }
+
+    return claimsData;
+}
+
+async function searchSerper(claimText, url) {
+
+    const domain = new URL(url).hostname;
+
+    const response = await fetch('https://google.serper.dev/search', {
+        method: 'POST',
+        headers: {
+            'X-API-KEY': process.env.SERPER_API_KEY,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            q: `site:${domain} ${claimText}`,
+            gl: 'br',
+            hl: 'pt'
+        })
+    });
+
+    const data = await response.json();
+
+    return data.organic
+        ?.slice(0, 3)
+        .map(result => result.link) || [];
 }
