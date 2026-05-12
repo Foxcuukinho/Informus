@@ -78,8 +78,8 @@ Veredito final gerado pela IA
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/Foxcuukinho/InformusHackNav.git
-cd InformusHackNav
+git clone https://github.com/Foxcuukinho/Informus.git
+cd Informus
 ```
 
 ### 2. Instale as dependências
@@ -210,13 +210,6 @@ Recebe um texto e retorna a análise dos claims verificáveis.
 ## To-do
 
 - [ ] FastSearch — verificação rápida sem busca web
-- [ ] MultipleClaimsFlux — fluxo otimizado para múltiplos claims
 - [ ] Extração de conteúdo das páginas com Cheerio
 - [ ] Veredito final gerado pela IA com base no conteúdo extraído
 - [ ] Interface de resultado mais detalhada
-
----
-
-## Licença
-
-Projeto desenvolvido para o **HackaNAV 2026** — Nave a Vela.
