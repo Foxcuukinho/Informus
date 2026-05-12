@@ -1,26 +1,85 @@
 # Informus
 
-Aplicação web com integração de IA via [OpenRouter](https://openrouter.ai/), construída com Node.js, Express e front-end em HTML/CSS/JS puro.
+<div align="center">
+  <img src="front-end/informus_favicon.svg" width="80" alt="Informus logo"/>
+  
+  **Verificador de fatos com IA**
+  
+  ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat&logo=node.js&logoColor=white)
+  ![Express](https://img.shields.io/badge/Express-5-000000?style=flat&logo=express&logoColor=white)
+  ![OpenRouter](https://img.shields.io/badge/OpenRouter-AI-7B61FF?style=flat)
+  ![Serper](https://img.shields.io/badge/Serper-Search-4285F4?style=flat)
+</div>
 
 ---
 
-## 📋 Pré-requisitos
-
-Antes de começar, certifique-se de ter instalado em sua máquina:
-
-- [Node.js](https://nodejs.org/) (versão 18 ou superior)
-- npm (já vem junto com o Node.js)
-- Uma chave de API do [OpenRouter](https://openrouter.ai/)
+> ⚠️ **Informus não pode ser considerado um medidor de verdade absoluta.**
 
 ---
 
-## 🚀 Como executar o projeto
+## O que é
+
+O **Informus** é uma aplicação web com o objetivo de combater a desinformação digital. Com a velocidade que informações falsas se espalham nas redes sociais, ficou cada vez mais difícil saber o que é verdade. O Informus foi criado para ajudar nisso.
+
+O usuário digita uma afirmação ou pergunta — pode ser uma ou várias ao mesmo tempo, como *"A Terra é plana e a NASA está escondendo isso de nós"* — e o sistema automaticamente:
+
+1. Identifica e extrai cada claim verificável do texto
+2. Busca em fontes confiáveis e oficiais na web
+3. Analisa o conteúdo encontrado
+4. Retorna um veredito fundamentado para cada afirmação
+
+Todas as regras do sistema são bem definidas para garantir o melhor funcionamento possível — desde a extração dos claims até a seleção das fontes e a geração do veredito final.
+
+---
+
+## Como funciona tecnicamente
+
+```
+Input do usuário
+      ↓
+Análise pela IA (OpenRouter / Llama 3.3 70B)
+      ↓
+Extração dos claims verificáveis
+      ↓
+Match com categorias e fontes confiáveis
+      ↓
+Busca no Google via Serper API (site:dominio claim)
+      ↓
+Extração de conteúdo relevante das páginas
+      ↓
+Veredito final gerado pela IA
+```
+
+---
+
+## Tecnologias
+
+| Camada      | Tecnologia                                    |
+|-------------|-----------------------------------------------|
+| Back-end    | Node.js + Express 5                           |
+| IA          | OpenRouter (Llama 3.3 70B + fallback)         |
+| Busca       | Serper API (Google Search)                    |
+| Scraping    | Cheerio                                       |
+| Front-end   | HTML, CSS, JavaScript puro                    |
+| Config      | dotenv                                        |
+
+---
+
+## Pré-requisitos
+
+- [Node.js](https://nodejs.org/) versão 18 ou superior
+- Chave de API do [OpenRouter](https://openrouter.ai/keys)
+- Chave de API do [Serper](https://serper.dev)
+
+---
+
+## Instalação
 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/foxcuukinho/Informus.git
-cd Informus
+git clone https://github.com/Foxcuukinho/InformusHackNav.git
+cd InformusHackNav
 ```
 
 ### 2. Instale as dependências
@@ -31,13 +90,15 @@ npm install
 
 ### 3. Configure as variáveis de ambiente
 
-Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+Crie um arquivo `.env` na raiz do projeto:
 
 ```env
-OPENROUTER_API_KEY=sua_chave_aqui
+IA_API_KEY=sua_chave_openrouter_aqui
+SERPER_API_KEY=sua_chave_serper_aqui
 ```
 
-> Você pode obter sua chave de API em [https://openrouter.ai/keys](https://openrouter.ai/keys)
+> Obtenha sua chave do OpenRouter em [openrouter.ai/keys](https://openrouter.ai/keys)  
+> Obtenha sua chave do Serper em [serper.dev](https://serper.dev)
 
 ### 4. Inicie o servidor
 
@@ -45,11 +106,7 @@ OPENROUTER_API_KEY=sua_chave_aqui
 node back-end/server.js
 ```
 
-> O caminho exato do arquivo principal pode variar. Se o comando acima não funcionar, verifique os arquivos dentro da pasta `back-end/`.
-
 ### 5. Acesse no navegador
-
-Abra o navegador e acesse:
 
 ```
 http://localhost:3000
@@ -57,39 +114,109 @@ http://localhost:3000
 
 ---
 
-## 📁 Estrutura do projeto
+## Estrutura do projeto
 
 ```
 Informus/
-├── back-end/        # Servidor Express e integração com a API
-├── static/          # Arquivos estáticos (imagens, etc.)
-├── style/           # Arquivos CSS
-├── script.js        # Script principal do front-end
-├── package.json     # Dependências do projeto
-└── .env             # Variáveis de ambiente (não commitado)
+├── back-end/
+│   ├── server.js             # Servidor Express, rotas e lógica principal
+│   ├── prompts.js            # Prompts da IA separados do código
+│   └── sources.json          # Fontes confiáveis por categoria
+├── front-end/
+│   ├── index.html            # Interface do usuário
+│   ├── script.js             # Lógica do front-end
+│   ├── style.css             # Estilos
+│   └── informus_favicon.svg  # Logo/favicon
+├── .env                      # Variáveis de ambiente (não commitado)
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## Fontes confiáveis suportadas
 
-| Camada     | Tecnologia                  |
-|------------|-----------------------------|
-| Back-end   | Node.js + Express 5         |
-| IA         | OpenRouter SDK              |
-| Front-end  | HTML, CSS, JavaScript puro  |
-| Config     | dotenv                      |
+| Categoria            | Fontes                                      |
+|----------------------|---------------------------------------------|
+| Saúde e Medicina     | WHO, Ministério da Saúde, BVS               |
+| Ciência e Tecnologia | NASA, MCTI                                  |
+| História             | Britannica, IPHAN                           |
+| Política e Leis      | Planalto, Senado, STF, Câmara               |
+| Meio Ambiente        | IBAMA, IPCC, INPE                           |
+| Economia             | Banco Central, IBGE, FMI, IPEA             |
+| Vacinas              | Ministério da Saúde, WHO Immunization       |
+| Espaço e Astronomia  | NASA, ESA                                   |
 
 ---
 
+## API
 
-## Coisas a fazer
+### `POST /startsearch`
 
-    - [] FastSearch
-    - [] MultipleClaimsFlux
-    -
+Recebe um texto e retorna a análise dos claims verificáveis.
 
-## ⚠️ Observações
+**Request:**
+```json
+{
+  "text": "A Terra é plana e a NASA está escondendo isso"
+}
+```
 
-- O arquivo `.env` **não deve ser commitado** no repositório (já está no `.gitignore`).
-- O projeto usa **ES Modules** (`"type": "module"` no `package.json`), portanto utilize `import/export` em vez de `require`.
+**Response (checkable):**
+```json
+{
+  "checkable": true,
+  "matched": true,
+  "claims": [
+    {
+      "claimText": "The Earth is flat",
+      "urls": ["https://www.nasa.gov"],
+      "searchUrls": [
+        "https://www.nasa.gov/earth-shape",
+        "https://www.nasa.gov/solar-system"
+      ]
+    },
+    {
+      "claimText": "NASA is hiding that the Earth is flat",
+      "urls": ["https://www.nasa.gov"],
+      "searchUrls": [
+        "https://www.nasa.gov/fact-or-fiction"
+      ]
+    }
+  ]
+}
+```
+
+**Response (não verificável):**
+```json
+{
+  "checkable": false,
+  "matched": false,
+  "claims": []
+}
+```
+
+---
+
+## Observações
+
+- O arquivo `.env` **não deve ser commitado** — já está no `.gitignore`
+- O projeto usa **ES Modules** (`"type": "module"`), use `import/export` em vez de `require`
+- O modelo principal é o `meta-llama/llama-3.3-70b-instruct:free` com fallback automático para `openrouter/free`
+- A Serper busca dentro do domínio das fontes confiáveis usando `site:dominio claim`
+
+---
+
+## To-do
+
+- [ ] FastSearch — verificação rápida sem busca web
+- [ ] MultipleClaimsFlux — fluxo otimizado para múltiplos claims
+- [ ] Extração de conteúdo das páginas com Cheerio
+- [ ] Veredito final gerado pela IA com base no conteúdo extraído
+- [ ] Interface de resultado mais detalhada
+
+---
+
+## Licença
+
+Projeto desenvolvido para o **HackaNAV 2026** — Nave a Vela.
