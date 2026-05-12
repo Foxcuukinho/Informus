@@ -3,7 +3,7 @@
 <div align="center">
   <img src="front-end/informus_favicon.svg" width="80" alt="Informus logo"/>
   
-  **Verificador de fatos com IA**
+  **Best fact-checker**
   
   ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat&logo=node.js&logoColor=white)
   ![Express](https://img.shields.io/badge/Express-5-000000?style=flat&logo=express&logoColor=white)
