@@ -97,8 +97,10 @@ IA_API_KEY=sua_chave_openrouter_aqui
 SERPER_API_KEY=sua_chave_serper_aqui
 ```
 
-> Obtenha sua chave do OpenRouter em [openrouter.ai/keys](https://openrouter.ai/keys)  
-> Obtenha sua chave do Serper em [serper.dev](https://serper.dev)
+| Variável         | Descrição                                         | Onde obter                                      |
+|------------------|---------------------------------------------------|-------------------------------------------------|
+| `IA_API_KEY`     | Chave de acesso à API do OpenRouter               | [openrouter.ai/keys](https://openrouter.ai/keys)|
+| `SERPER_API_KEY` | Chave de acesso à API de busca do Serper          | [serper.dev](https://serper.dev)                |
 
 ### 4. Inicie o servidor
 
@@ -195,6 +197,50 @@ Recebe um texto e retorna a análise dos claims verificáveis.
   "claims": []
 }
 ```
+
+---
+
+## Exemplos de inputs
+
+**✅ Funcionam bem**
+```
+"A Terra é plana"
+"Vacinas causam autismo"
+"A NASA tá escondendo que existem alienígenas"
+"O Brasil tem a maior floresta tropical do mundo"
+"A inflação no Brasil subiu em 2024"
+```
+
+**❌ Não funcionam**
+```
+"ok"
+"e aí?"
+"pizza é gostosa"
+"eu acho que talvez"
+"você é burro"
+```
+
+---
+
+## Limitações conhecidas
+
+- **Rate limit** — os modelos gratuitos do OpenRouter têm limite de requisições por minuto. Se o sistema retornar erro, aguarde alguns segundos e tente novamente.
+- **Modelos gratuitos** — a qualidade das respostas pode variar dependendo do modelo disponível no momento.
+- **Sites que bloqueiam fetch** — alguns sites protegem seu conteúdo contra scraping e podem não retornar o texto esperado.
+- **Categorias limitadas** — o sistema só busca nas categorias e fontes definidas em `sources.json`. Claims fora dessas categorias ficam sem URLs de referência.
+- **Idioma** — os claims são reescritos em inglês para melhorar a precisão da busca.
+
+---
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| `Missing credentials` | `IA_API_KEY` não definida no `.env` | Adicione a chave no `.env` |
+| `Cannot GET /` | Pasta do front-end errada no `express.static` | Verifique o caminho em `server.js` |
+| `429 Too Many Requests` | Rate limit do modelo gratuito | Aguarde alguns segundos |
+| `JSON inválido` | IA retornou texto fora do formato | Geralmente resolve na próxima tentativa |
+| `Cannot find module` | Rodando `node server.js` da pasta errada | Use `node back-end/server.js` na raiz |
 
 ---
 
